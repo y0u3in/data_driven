@@ -4,7 +4,7 @@
 リポジトリの中にデータセットファイルを入れてください.
 
 
-ファイルは、renameしないと使えないと思います.(mac だったらこんな感じでできますhttps://pc-karuma.net/mac-rename-files/)
+ファイルは、renameしないと使えないです思います.(mac だったらこんな感じでできますhttps://pc-karuma.net/mac-rename-files/)
 
 命名規則
 
