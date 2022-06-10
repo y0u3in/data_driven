@@ -3,14 +3,19 @@ import pprint
 
 subs=[]
 
-for i in range(3):
+r i in range(3):
+    if (i == 0) :
+        letter = "A_"
+    elif (i == 1) :
+        letter = "B_"
+    else :
+        letter = "C_"
     for j in range(10):
         if(j!=9):
-            index="0"+str(i+1)+"0"+str(j+1)
+            index="0"+str(j+1)          
         else:
-            index=ndex="0"+str(i+1)+str(j+1)
-
-        with open("data/"+index+".csv") as f:
+            index=ndex=str(j+1)
+        with open("data_sfc/"+letter+index+".csv") as f:
             reader=csv.reader(f)
             subs.append([row for row in reader])
 
