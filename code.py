@@ -1,8 +1,9 @@
 import csv
+import pprint
 
 subs=[]
 
-r i in range(3):
+for i in range(3):
     if (i == 0) :
         letter = "A_"
     elif (i == 1) :
@@ -20,61 +21,66 @@ r i in range(3):
 
 for alpha in range(30):
     for beta in range(30):
+        with open("data_sfc/solution.csv", "a") as f :
+            writer = csv.writer(f)
+        
+            if(alpha<beta):
+                dences=[]
+                Margin=0
+                length=0
 
-        if(alpha<beta):
-            dences=[]
-            Margin=0
-            length=0
-
-            if(len(subs[alpha])>len(subs[beta])):
-                length=len(subs[beta])-60
-                Margin=len(subs[alpha])-len(subs[beta])
-            else:
-                length=len(subs[alpha])-60
-                Margin=len(subs[beta])-len(subs[alpha])
-            
-            for i in range(length):
-
-                sums=0
-                difs=0
-                dence=1
-
+                if(len(subs[alpha])>len(subs[beta])):
+                    length=len(subs[beta])-60
+                    Margin=len(subs[alpha])-len(subs[beta])
+                else:
+                    length=len(subs[alpha])-60
+                    Margin=len(subs[beta])-len(subs[alpha])
                 
-                    
-                for j in range(60):
-                    
-                        if(len(subs[alpha])>len(subs[beta])):
-                            dif=int(subs[alpha][i+1+j+Margin][2])-int(subs[beta][i+1+j][2])
-                            sum=int(subs[alpha][i+1+j+Margin][2])+int(subs[beta][i+1+j][2])
-                        elif(len(subs[alpha])>len(subs[beta])):
-                            dif=int(subs[alpha][i+1+j][2])-int(subs[beta][i+1+j+Margin][2])
-                            sum=int(subs[alpha][i+1+j][2])+int(subs[beta][i+1+j+Margin][2])
-                        else:
-                            dif=int(subs[alpha][i+1+j][2])-int(subs[beta][i+1+j][2])
-                            sum=int(subs[alpha][i+1+j][2])+int(subs[beta][i+1+j][2])
+                for i in range(length):
 
-                        dif=dif*dif
+                    sums=0
+                    difs=0
+                    dence=1
+
+                    
                         
-                        sum=sum*sum
-                        sums+=sum
-                        difs+=dif
-                    
-            
-                if(sums>=5500):
-                    dence=difs/sums
+                    for j in range(60):
+                        
+                            if(len(subs[alpha])>len(subs[beta])):
+                                dif=int(subs[alpha][i+1+j+Margin][2])-int(subs[beta][i+1+j][2])
+                                sum=int(subs[alpha][i+1+j+Margin][2])+int(subs[beta][i+1+j][2])
+                            elif(len(subs[alpha])>len(subs[beta])):
+                                dif=int(subs[alpha][i+1+j][2])-int(subs[beta][i+1+j+Margin][2])
+                                sum=int(subs[alpha][i+1+j][2])+int(subs[beta][i+1+j+Margin][2])
+                            else:
+                                dif=int(subs[alpha][i+1+j][2])-int(subs[beta][i+1+j][2])
+                                sum=int(subs[alpha][i+1+j][2])+int(subs[beta][i+1+j][2])
 
-                dences.append(dence)
+                            dif=dif*dif
+                            
+                            sum=sum*sum
+                            sums+=sum
+                            difs+=dif
+                        
+                
+                    if(sums>=5500):
+                        dence=difs/sums
 
-            point=0
+                    dences.append(dence)
 
-            for i in range(len(dences)-15):
-                get=True
+                point=0
 
-                for j in range(15):
-                    if((dences[i+j])>0.05):
-                        get=False
+                for i in range(len(dences)-15):
+                    get=True
 
-                if(get):
-                    point+=1
-            
-            print(str(alpha+1)+","+str(beta+1)+","+str(point))
+                    for j in range(15):
+                        if((dences[i+j])>0.05):
+                            get=False
+
+                    if(get):
+                        point+=1
+                
+                #print(str(alpha+1)+","+str(beta+1)+","+str(point))
+                data = [[int(alpha + 1), int(beta + 1), int(point)]]
+                #data.append([int(alpha + 1), int(beta + 1), int(point)])
+                writer.writerows(data)
