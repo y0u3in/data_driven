@@ -2,7 +2,7 @@ import csv
 
 subs=[]
 
-r i in range(3):
+for i in range(3):
     if (i == 0) :
         letter = "A_"
     elif (i == 1) :
